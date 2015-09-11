@@ -1,0 +1,25 @@
+{
+  "name": "CustomCheckbox",
+  "version": "0.1.0",
+  "summary": "A short description of CustomCheckbox.",
+  "description": "",
+  "homepage": "https://github.com/<GITHUB_USERNAME>/CustomCheckbox",
+  "license": "MIT",
+  "authors": {
+    "Miguel Saiz": "miguelsaizo@gmail.com"
+  },
+  "source": {
+    "git": "https://github.com/<GITHUB_USERNAME>/CustomCheckbox.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "requires_arc": true,
+  "source_files": "Pod/Classes/**/*",
+  "resource_bundles": {
+    "CustomCheckbox": [
+      "Pod/Assets/*.png"
+    ]
+  }
+}

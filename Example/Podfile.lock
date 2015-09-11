@@ -1,0 +1,14 @@
+PODS:
+  - CustomCheckbox (0.1.0)
+
+DEPENDENCIES:
+  - CustomCheckbox (from `../`)
+
+EXTERNAL SOURCES:
+  CustomCheckbox:
+    :path: ../
+
+SPEC CHECKSUMS:
+  CustomCheckbox: e6accf0abed74db5c369292ec7839baaa6038e49
+
+COCOAPODS: 0.38.2
