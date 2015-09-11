@@ -9,17 +9,40 @@
 import UIKit
 
 public protocol CheckboxDelegate {
+  /**
+  Ask the delegate wther this checkbox can be selected, if NO is returned, it will remain unchecked
+  */
   func canCheck()->Bool
+  
+  /**
+  Tells the delegate when a particular checkbox has been checked
+  */
   func checked(state: Bool, checkbox: Checkbox)
 }
 
+/**
+A simple checkbox which has images for states.
 
+Implementing the delegate allows finding out when a checkbox has been checked as well as limiting the total amount of checkboxes that may be checked.
+*/
 public class Checkbox: UIControl {
   
   internal var checkedImageView = UIImageView()
   internal var uncheckedImageView = UIImageView()
+  
+  /**
+  Defines the scale factor to grow when touching down
+  */
   public var scaleFactor: CGFloat = 1.2
+  
+  /**
+  Defines the animation duration while changing button states
+  */
   public var animationDuration: NSTimeInterval = 0.1
+  
+  /**
+  The delegate for this checkbox
+  */
   public var delegate: CheckboxDelegate?
 
   init() {
@@ -30,12 +53,22 @@ public class Checkbox: UIControl {
     super.init(coder: aDecoder)
   }
   
+  /**
+  Sets the checked image
+  
+  @param image The image to use
+  */
   public func setCheckedImage(image: UIImage) {
     checkedImageView.image = image
     checkedImageView.alpha = 0
     addSubview(checkedImageView)
   }
   
+  /**
+  Sets the unchecked image
+  
+  @param image The image to use
+  */
   public func setUncheckedImage(image: UIImage) {
     uncheckedImageView.image = image
     addSubview(uncheckedImageView)
