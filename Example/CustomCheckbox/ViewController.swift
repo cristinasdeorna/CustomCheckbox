@@ -10,25 +10,44 @@ import UIKit
 import CustomCheckbox
 
 class ViewController: UIViewController {
-  @IBOutlet weak var checkbox: Checkbox!
+  var currentlyChecked = 0
+  var maxChecked = 2
+  @IBOutlet weak var cb1: Checkbox!
+  @IBOutlet weak var cb2: Checkbox!
+  @IBOutlet weak var cb3: Checkbox!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+      // Do any additional setup after loading the view, typically from a nib.
       
-      checkbox.setCheckedImage(UIImage(named: "checked")!)
-      checkbox.setUncheckedImage(UIImage(named: "unchecked")!)
+      cb1.delegate = self
+      cb1.setCheckedImage(UIImage(named: "checked")!)
+      cb1.setUncheckedImage(UIImage(named: "unchecked")!)
+      
+      cb2.delegate = self
+      cb2.setCheckedImage(UIImage(named: "checked")!)
+      cb2.setUncheckedImage(UIImage(named: "unchecked")!)
+      
+      cb3.delegate = self
+      cb3.setCheckedImage(UIImage(named: "checked")!)
+      cb3.setUncheckedImage(UIImage(named: "unchecked")!)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-  @IBAction func pressedCheckbox(sender: AnyObject) {
-    print("pressed the checkbox")
-  }
 }
 
-
+extension ViewController: CheckboxDelegate {
+  
+  func canCheck()->Bool {
+    return currentlyChecked < maxChecked
+  }
+  
+  func checked(state: Bool, checkbox: Checkbox) {
+    currentlyChecked += state ? 1 : -1
+    print("\(currentlyChecked) checkboxes are checked")
+  }
+}
 

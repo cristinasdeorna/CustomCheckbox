@@ -9,9 +9,8 @@
 import UIKit
 
 public protocol CheckboxDelegate {
-  func canCheck(enabled: Bool)
-  func checked(checkbox: Checkbox)
-  func unchecked(checkbox: Checkbox)
+  func canCheck()->Bool
+  func checked(state: Bool, checkbox: Checkbox)
 }
 
 
@@ -55,17 +54,24 @@ public class Checkbox: UIControl {
   public override func endTrackingWithTouch(touch: UITouch?, withEvent event: UIEvent?) {
     
     if let point = touch?.locationInView(self) where pointInside(point, withEvent: nil) {
-      selected = !selected
       
-      delegate?.checked(self)
-      UIView.animateWithDuration(animationDuration) { () -> Void in
-        self.transform = CGAffineTransformIdentity
-        self.checkedImageView.alpha = self.selected ? 1 : 0
-        self.uncheckedImageView.alpha = self.selected ? 0 : 1
+      // If it's possible to check
+      if delegate == nil || delegate!.canCheck() || selected == true {
+        selected = !selected
+        delegate?.checked(selected, checkbox: self)
+        UIView.animateWithDuration(animationDuration) { () -> Void in
+          self.transform = CGAffineTransformIdentity
+          self.checkedImageView.alpha = self.selected ? 1 : 0
+          self.uncheckedImageView.alpha = self.selected ? 0 : 1
+        }
+      } else { // Can't be checked
+        print("can't be checked")
+        UIView.animateWithDuration(animationDuration) { () -> Void in
+          self.transform = CGAffineTransformIdentity
+        }
       }
       
-    } else {
-      delegate?.unchecked(self)
+    } else { // Touch cancelled
       UIView.animateWithDuration(animationDuration) { () -> Void in
         self.transform = CGAffineTransformIdentity
       }

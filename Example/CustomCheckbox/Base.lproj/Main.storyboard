@@ -24,19 +24,39 @@
                                     <constraint firstAttribute="width" secondItem="fJ7-zm-VVd" secondAttribute="height" multiplier="1:1" id="8Pp-RY-Yzc"/>
                                     <constraint firstAttribute="width" constant="60" id="YMB-pU-TUb"/>
                                 </constraints>
-                                <connections>
-                                    <action selector="pressedCheckbox:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="gdk-lH-XBl"/>
-                                </connections>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9PH-dD-JSr" customClass="Checkbox" customModule="CustomCheckbox">
+                                <rect key="frame" x="170" y="270" width="60" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="9PH-dD-JSr" secondAttribute="height" multiplier="1:1" id="2fA-ww-YO8"/>
+                                    <constraint firstAttribute="width" constant="60" id="W0b-cx-zm7"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0cJ-Tj-9Da" customClass="Checkbox" customModule="CustomCheckbox">
+                                <rect key="frame" x="370" y="270" width="60" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="0cJ-Tj-9Da" secondAttribute="height" multiplier="1:1" id="3Rp-YO-GnB"/>
+                                    <constraint firstAttribute="width" constant="60" id="iKS-vO-tjV"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="fJ7-zm-VVd" firstAttribute="leading" secondItem="9PH-dD-JSr" secondAttribute="trailing" constant="40" id="AGE-QC-1A5"/>
+                            <constraint firstItem="0cJ-Tj-9Da" firstAttribute="leading" secondItem="fJ7-zm-VVd" secondAttribute="trailing" constant="40" id="AYW-kT-VmT"/>
+                            <constraint firstItem="9PH-dD-JSr" firstAttribute="centerY" secondItem="fJ7-zm-VVd" secondAttribute="centerY" id="CwI-CF-XRz"/>
+                            <constraint firstItem="0cJ-Tj-9Da" firstAttribute="width" secondItem="0cJ-Tj-9Da" secondAttribute="height" multiplier="1:1" id="bog-EP-248"/>
                             <constraint firstItem="fJ7-zm-VVd" firstAttribute="centerY" secondItem="kh9-bI-dsS" secondAttribute="centerY" id="c8O-zV-25f"/>
+                            <constraint firstItem="0cJ-Tj-9Da" firstAttribute="width" secondItem="0cJ-Tj-9Da" secondAttribute="height" multiplier="1:1" id="gaQ-8g-vZn"/>
                             <constraint firstItem="fJ7-zm-VVd" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="ihZ-Sb-fE1"/>
+                            <constraint firstItem="9PH-dD-JSr" firstAttribute="width" secondItem="9PH-dD-JSr" secondAttribute="height" multiplier="1:1" id="l5P-Ur-wMs"/>
+                            <constraint firstItem="0cJ-Tj-9Da" firstAttribute="centerY" secondItem="fJ7-zm-VVd" secondAttribute="centerY" id="u50-dT-goM"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="checkbox" destination="fJ7-zm-VVd" id="2Kk-jV-drK"/>
+                        <outlet property="cb1" destination="9PH-dD-JSr" id="aha-lX-FP8"/>
+                        <outlet property="cb2" destination="fJ7-zm-VVd" id="95p-vJ-NyZ"/>
+                        <outlet property="cb3" destination="0cJ-Tj-9Da" id="dIi-CT-jAI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
