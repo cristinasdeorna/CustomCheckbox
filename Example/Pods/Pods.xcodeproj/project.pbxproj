@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		2A6EA5B8C2724621A708EFE770D2678A /* Pods-CustomCheckbox_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 48EE96940AB0FB587F6E34667B5609A6 /* Pods-CustomCheckbox_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2F13459239F000AC74B9F69BCFD59F1E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 218E096049F13EA7A92037E95D4BED85 /* Foundation.framework */; };
-		548EB508AC8C778E1F296169F4508302 /* ReplaceMe.swift in Sources */ = {isa = PBXBuildFile; fileRef = F811A5468B2A280265F10D8DEAA34C2C /* ReplaceMe.swift */; };
 		7D2ADED2F2C5CBAB91C06D70B92CB315 /* Pods-CustomCheckbox_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = CCBD63BCAC057F82F1C5FD8CA65552B8 /* Pods-CustomCheckbox_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		843AC93D5275AB63447FC8FA3FC6E952 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 218E096049F13EA7A92037E95D4BED85 /* Foundation.framework */; };
 		C321F9C21030297054A665B0336E3689 /* CustomCheckbox-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 9178FEE0C9714FF68E523295B1E85AC7 /* CustomCheckbox-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -17,6 +16,7 @@
 		D0E090E35720BE0D125F02672D191700 /* CustomCheckbox-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = CE1A68E83DCC39251F0AC4D149F6138A /* CustomCheckbox-dummy.m */; };
 		DC70E8304DD729176712ACEC9588C965 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 218E096049F13EA7A92037E95D4BED85 /* Foundation.framework */; };
 		E0C41EBD107295B6B93D58B43761685D /* Pods-CustomCheckbox_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B48C2943ED9775FB963D58968FBDB30 /* Pods-CustomCheckbox_Example-dummy.m */; };
+		E69F01F61BA328140054DECC /* Checkbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69F01F51BA328140054DECC /* Checkbox.swift */; settings = {ASSET_TAGS = (); }; };
 		EE1698CAE230C5228C4E9D59738C6F73 /* Pods-CustomCheckbox_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C52CCC2A5786442619C9E97E91DEA5 /* Pods-CustomCheckbox_Tests-dummy.m */; };
 /* End PBXBuildFile section */
 
@@ -75,9 +75,9 @@
 		CCBD63BCAC057F82F1C5FD8CA65552B8 /* Pods-CustomCheckbox_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-CustomCheckbox_Example-umbrella.h"; sourceTree = "<group>"; };
 		CE1A68E83DCC39251F0AC4D149F6138A /* CustomCheckbox-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "CustomCheckbox-dummy.m"; sourceTree = "<group>"; };
 		DF61460F6E163E5B612CB6593B480A4D /* Pods_CustomCheckbox_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CustomCheckbox_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E69F01F51BA328140054DECC /* Checkbox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Checkbox.swift; sourceTree = "<group>"; };
 		EA598B23FA51A9091DA02A7D951413C2 /* Pods_CustomCheckbox_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CustomCheckbox_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EAF445666A4CB2B4B2FE15E93318F6C0 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F811A5468B2A280265F10D8DEAA34C2C /* ReplaceMe.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ReplaceMe.swift; sourceTree = "<group>"; };
 		F8CFB4839D1DCDA76AEB6F3F962E1933 /* Pods-CustomCheckbox_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-CustomCheckbox_Example.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -119,7 +119,7 @@
 		27C785354D3B603342AFD1FC7A7FE965 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				F811A5468B2A280265F10D8DEAA34C2C /* ReplaceMe.swift */,
+				E69F01F51BA328140054DECC /* Checkbox.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -410,8 +410,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E69F01F61BA328140054DECC /* Checkbox.swift in Sources */,
 				D0E090E35720BE0D125F02672D191700 /* CustomCheckbox-dummy.m in Sources */,
-				548EB508AC8C778E1F296169F4508302 /* ReplaceMe.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -458,6 +458,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3DAED1C9C8DDEC554E5FF05372BF15AE /* CustomCheckbox-Private.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 0.1.0;
 				DEFINES_MODULE = YES;
@@ -531,6 +532,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3DAED1C9C8DDEC554E5FF05372BF15AE /* CustomCheckbox-Private.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 0.1.0;
 				DEFINES_MODULE = YES;
