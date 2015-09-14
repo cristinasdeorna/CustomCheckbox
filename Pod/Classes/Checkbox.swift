@@ -29,6 +29,7 @@ public class Checkbox: UIControl {
   
   internal var checkedImageView = UIImageView()
   internal var uncheckedImageView = UIImageView()
+  public var identifier: Int = 0
   
   /**
   Defines the scale factor to grow when touching down
@@ -44,15 +45,7 @@ public class Checkbox: UIControl {
   The delegate for this checkbox
   */
   public var delegate: CheckboxDelegate?
-  
-  init() {
-    super.init(frame: CGRectZero)
-  }
-  
-  required public init?(coder aDecoder: NSCoder) {
-    super.init(coder: aDecoder)
-  }
-  
+
   /**
   Sets the checked image
   
