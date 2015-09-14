@@ -44,7 +44,7 @@ public class Checkbox: UIControl {
   The delegate for this checkbox
   */
   public var delegate: CheckboxDelegate?
-
+  
   init() {
     super.init(frame: CGRectZero)
   }
@@ -115,5 +115,5 @@ public class Checkbox: UIControl {
     checkedImageView.frame = bounds
     uncheckedImageView.frame = bounds
   }
-
+  
 }
