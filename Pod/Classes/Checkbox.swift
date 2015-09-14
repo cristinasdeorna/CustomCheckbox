@@ -67,6 +67,17 @@ public class Checkbox: UIControl {
     addSubview(uncheckedImageView)
   }
   
+  /**
+  Allows changing the checkbox state programatically. Will check the checkbox if no parameters are used
+  
+  @param checked Wether this checkbox has been checked. True by default
+  */
+  public func setChecked(checked: Bool = true) {
+    selected = checked
+    self.checkedImageView.alpha = self.selected ? 1 : 0
+    self.uncheckedImageView.alpha = self.selected ? 0 : 1
+  }
+  
   override public func beginTrackingWithTouch(touch: UITouch, withEvent event: UIEvent?) -> Bool {
     
     transform = CGAffineTransformIdentity
