@@ -1,119 +1,127 @@
 //
-//  Checkbox.swift
-//  Pods
+//  CategoryListViewController.swift
+//  ios-app
 //
-//  Created by Miguel Saiz on 9/11/15.
-//
+//  Created by Miguel Saiz on 9/9/15.
+//  Copyright © 2015 Soluciones GBH. All rights reserved.
 //
 
 import UIKit
+import CustomCheckbox
 
-public protocol CheckboxDelegate {
+protocol CategoryListDelegate {
+  /**
+  Called when dismissing the CategoryList, will return a list of the chosen categories
+  */
+  func choseCategories(categories: [Category], index: [Int])
+}
+
+class CategoryListViewController: UIViewController {
+  var listView = CategoryListView()
+  var delegate: CategoryListDelegate?
+  private var categories: [Category]?
+  private var currentlyChecked = 0
+  private let maxChecked = 3
+  private var checkedCategories = [Int]()
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    
+    listView.controller = self
+    listView.tableView.delegate = self
+    listView.tableView.dataSource = self
+    listView.tableView.allowsSelection = false
+    view = listView
+    
+    
+    APIWrapper.sharedInstance.listCategories(CategoriesRequest(language: nil)) { (categories: [Category]?, error: NSError?) -> Void in
+      if error == nil {
+        self.categories = categories
+        self.listView.tableView.reloadData()
+      } else {
+        print("An error has occurred")
+      }
+    }
+  }
+  
+  func setChecked(indices: [Int]) {
+    checkedCategories = indices
+    currentlyChecked = indices.count
+    listView.tableView.reloadData()
+  }
+  
+  override func didReceiveMemoryWarning() {
+    super.didReceiveMemoryWarning()
+    // Dispose of any resources that can be recreated.
+  }
+  
+  override func viewWillDisappear(animated: Bool) {
+    var result = [Category]()
+    
+    for i in checkedCategories {
+      result.append(categories![i])
+    }
+    
+    delegate?.choseCategories(result, index: checkedCategories)
+  }
+}
+
+extension CategoryListViewController: UITableViewDataSource, UITableViewDelegate {
+  // MARK: - Table view data source
+  
+  func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    return 1
+  }
+  
+  func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return categories?.count ?? 0
+  }
+  
+  func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    return 52
+  }
+  
+  func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    var cell = tableView.dequeueReusableCellWithIdentifier("categoryCell") as? CategoryTableViewCell
+    
+    if cell == nil {
+      cell = CategoryTableViewCell(withCheckbox: true)
+      cell?.loadCategory(categories![indexPath.row])
+      cell?.checkbox?.delegate = self
+      cell?.checkbox?.identifier = indexPath.row
+      
+      if checkedCategories.contains(indexPath.row) {
+        cell?.checkbox?.setChecked()
+      }
+      
+      let button = UIButton(type: UIButtonType.Custom)
+      button.setImage(UIImage(named: "checkbox_off"), forState: UIControlState.Normal)
+      cell!.accessoryView = button
+    }
+    
+    return cell!
+  }
+}
+
+extension CategoryListViewController: CheckboxDelegate {
+  
   /**
   Ask the delegate wther this checkbox can be selected, if NO is returned, it will remain unchecked
   */
-  func canCheck()->Bool
+  func canCheck()->Bool {
+    return currentlyChecked < maxChecked
+  }
   
   /**
   Tells the delegate when a particular checkbox has been checked
   */
-  func checked(state: Bool, checkbox: Checkbox)
-}
-
-/**
-A simple checkbox which has images for states.
-
-Implementing the delegate allows finding out when a checkbox has been checked as well as limiting the total amount of checkboxes that may be checked.
-*/
-public class Checkbox: UIControl {
-  
-  internal var checkedImageView = UIImageView()
-  internal var uncheckedImageView = UIImageView()
-  
-  /**
-  Defines the scale factor to grow when touching down
-  */
-  public var scaleFactor: CGFloat = 1.2
-  
-  /**
-  Defines the animation duration while changing button states
-  */
-  public var animationDuration: NSTimeInterval = 0.1
-  
-  /**
-  The delegate for this checkbox
-  */
-  public var delegate: CheckboxDelegate?
-
-  init() {
-    super.init(frame: CGRectZero)
-  }
-  
-  required public init?(coder aDecoder: NSCoder) {
-    super.init(coder: aDecoder)
-  }
-  
-  /**
-  Sets the checked image
-  
-  @param image The image to use
-  */
-  public func setCheckedImage(image: UIImage) {
-    checkedImageView.image = image
-    checkedImageView.alpha = 0
-    addSubview(checkedImageView)
-  }
-  
-  /**
-  Sets the unchecked image
-  
-  @param image The image to use
-  */
-  public func setUncheckedImage(image: UIImage) {
-    uncheckedImageView.image = image
-    addSubview(uncheckedImageView)
-  }
-  
-  override public func beginTrackingWithTouch(touch: UITouch, withEvent event: UIEvent?) -> Bool {
+  func checked(state: Bool, checkbox: Checkbox) {
+    currentlyChecked += state ? 1 : -1
     
-    transform = CGAffineTransformIdentity
-    UIView.animateWithDuration(animationDuration) { () -> Void in
-      self.transform = CGAffineTransformMakeScale(self.scaleFactor, self.scaleFactor)
-    }
-    
-    return true
-  }
-  
-  public override func endTrackingWithTouch(touch: UITouch?, withEvent event: UIEvent?) {
-    
-    if let point = touch?.locationInView(self) where pointInside(point, withEvent: nil) {
-      
-      // If it's possible to check
-      if delegate == nil || delegate!.canCheck() || selected == true {
-        selected = !selected
-        delegate?.checked(selected, checkbox: self)
-        UIView.animateWithDuration(animationDuration) { () -> Void in
-          self.transform = CGAffineTransformIdentity
-          self.checkedImageView.alpha = self.selected ? 1 : 0
-          self.uncheckedImageView.alpha = self.selected ? 0 : 1
-        }
-      } else { // Can't be checked
-        print("can't be checked")
-        UIView.animateWithDuration(animationDuration) { () -> Void in
-          self.transform = CGAffineTransformIdentity
-        }
-      }
-      
-    } else { // Touch cancelled
-      UIView.animateWithDuration(animationDuration) { () -> Void in
-        self.transform = CGAffineTransformIdentity
-      }
+    if state {
+      checkedCategories.append(checkbox.identifier)
+    } else {
+      checkedCategories = checkedCategories.filter( {$0 != checkbox.identifier})
     }
   }
-  
-  override public func layoutSubviews() {
-    checkedImageView.frame = bounds
-    uncheckedImageView.frame = bounds
-  }
-
 }
